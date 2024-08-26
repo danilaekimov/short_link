@@ -12,34 +12,34 @@ type webResourse struct {
 	counter int32
 }
 
-type URLsStorage struct {
-	shortURLs map[string]webResourse
+type URLStorage struct {
+	ShortURLs map[string]webResourse
 }
 
-func NewStorage() *URLsStorage {
-	return &URLsStorage{
-		shortURLs: make(map[string]webResourse),
+func NewStorage() *URLStorage {
+	return &URLStorage{
+		ShortURLs: make(map[string]webResourse),
 	}
 }
 
-func (st URLsStorage) SaveURL(URL string) (shortURL string) {
+func (st URLStorage) SaveURL(URL string) (shortURL string) {
 
 	shortURL = util.GetMD5Hash(URL, 4)
-	st.shortURLs[shortURL] = webResourse{
+	st.ShortURLs[shortURL] = webResourse{
 		URL:     URL,
 		counter: 0}
-	log.Println(st.shortURLs[shortURL])
+	log.Println(st.ShortURLs[shortURL])
 	return
 
 }
 
-func (st URLsStorage) GetByShortURL(requiredURL string) (shortURL string, err error) {
-	webResourse, ok := st.shortURLs[requiredURL]
+func (st URLStorage) GetByShortURL(requiredURL string) (shortURL string, err error) {
+	webResourse, ok := st.ShortURLs[requiredURL]
 	if ok {
 		webResourse.counter += 1
-		st.shortURLs[requiredURL] = webResourse
+		st.ShortURLs[requiredURL] = webResourse
 
-		log.Println(st.shortURLs[requiredURL])
+		log.Println(st.ShortURLs[requiredURL])
 
 		return webResourse.URL, nil
 	} else {

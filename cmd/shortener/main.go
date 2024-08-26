@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/danilaekimov/short_link/internal/handlers"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/danilaekimov/short_link/internal/handlers"
 )
 
 func main() {
